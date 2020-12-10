@@ -1,3 +1,4 @@
+# Server
 import socket
 import threading
 
@@ -55,7 +56,7 @@ def main():
     print("Start server")
     
     rooms.clear()
-    r_names = []
+    r_names = {}
     host = socket.gethostbyname(socket.gethostname())
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     server = (host, 9090)
@@ -63,10 +64,11 @@ def main():
     
     while True:
         information, adress = sock.recvfrom(254)
+        port = 9090 + int(information.decode("utf-8"))
         if port not in rooms:
             print("New room")
-            room = threading.Thread(target=room, args=("tryz", port))
-            room.start()
+            rm = threading.Thread(target=room, args=("tryz", port))
+            rm.start()
             rooms.append(port)
             r_names[port] = []
         
