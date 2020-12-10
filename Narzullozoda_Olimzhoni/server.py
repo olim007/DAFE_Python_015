@@ -1,12 +1,12 @@
-# Server
 import socket
 import threading
 
 max_mails = 128
-port = 9090
+PORT = 9090
 rooms = []
 
 def room(name, port):
+    port = 0
     clnts = []
     mails = []
     host = socket.gethostbyname(socket.gethostname())
@@ -52,7 +52,7 @@ def room(name, port):
     sock.close()
     
 def main():
-    print("Start of server")
+    print("Start server")
     
     rooms.clear()
     r_names = []
